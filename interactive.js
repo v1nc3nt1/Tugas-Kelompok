@@ -5,7 +5,7 @@ const deals = [
     ["Batik Air", "Fly with Style", "11:20", "2h 25m", "13:45", "Rp 1.180.000"]
 ];
 
-// Menampilkan daftar penerbangan
+
 const dealList = document.getElementById("deals");
 
 dealList.innerHTML = deals.map(deal => `
@@ -34,7 +34,7 @@ dealList.innerHTML = deals.map(deal => `
     </div>
 `).join("");
 
-// Menukar kota asal dan tujuan
+
 const swapButton = document.getElementById("swap");
 
 swapButton.onclick = function () {

@@ -1,5 +1,4 @@
 
-/* PENGATURAN DASAR */
 * {
     box-sizing: border-box;
 }
@@ -21,14 +20,12 @@ a {
     text-decoration: none;
 }
 
-/* LAYOUT UTAMA */
 .app {
     display: grid;
     grid-template-columns: 180px 1fr;
     min-height: 100vh;
 }
 
-/* SIDEBAR */
 .sidebar {
     background: #0c1b3b;
     color: white;
@@ -53,7 +50,6 @@ a {
     background: #1558e8;
 }
 
-/* HERO SECTION */
 .hero {
     min-height: 420px;
     background-color: #1558e8;
@@ -94,7 +90,6 @@ a {
     max-width: 450px;
 }
 
-/* PENCARIAN TIKET */
 .search {
     margin: -45px 30px 0;
     position: relative;
@@ -160,7 +155,6 @@ a {
     border-radius: 8px;
 }
 
-/* KONTEN UTAMA */
 .content {
     display: grid;
     grid-template-columns: 1fr 250px;
@@ -187,7 +181,6 @@ a {
     color: #1558e8;
 }
 
-/* POPULAR ROUTES */
 .routes {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -216,7 +209,6 @@ a {
     margin: 0;
 }
 
-/* BEST DEALS */
 .deal {
     background: white;
     padding: 15px;
