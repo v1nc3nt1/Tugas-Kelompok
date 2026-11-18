@@ -4,133 +4,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SkyFly - Book affordable flight tickets and explore the world.">
     <title>SkyFly - Book Flights</title>
     <link rel="stylesheet" href="layout.css">
 </head>
 <body>
 
-    <div class="app">
+<div class="app">
 
-        <aside class="sidebar">
-            <h2 class="brand">✈ SkyFly</h2>
+    <aside class="side">
+        <div class="logo">
+            <svg class="i plane" viewBox="0 0 24 24">
+                <path d="M2 14l20-9-6 16-4-6-6-1z"/>
+            </svg>
+            SkyFly
+        </div>
 
-            <a href="#" class="active">Home</a>
-            <a href="#">My Booking</a>
-            <a href="#">Check-in</a>
-        </aside>
+        <nav>
+            <a href="#" class="on" data-nav="home">
+                <svg class="i" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/></svg>
+                Home
+            </a>
+            <a href="#" data-nav="booking">
+                <svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M9 5v14"/></svg>
+                My Booking
+            </a>
+            <a href="#" data-nav="checkin">
+                <svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>
+                Check-in
+            </a>
+            <a href="#" data-nav="profile">
+                <svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                Profile
+            </a>
+            <a href="#" data-nav="help">
+                <svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/></svg>
+                Help
+            </a>
+        </nav>
 
-        <main class="main">
+        <div class="promo">
+            <div class="promo-icon">✈</div>
+            <h3>Travel More,<br>Pay Less!</h3>
+            <p>Get exclusive deals only here.</p>
+            <a href="#deals" class="pill">Explore Deals →</a>
+        </div>
 
-    
-          <section class="hero"> 
+        <div class="bali">
+            <span>Discover<br>Bali</span>
+            <span class="bali-arrow">→</span>
+        </div>
+    </aside>
 
-                <div class="hero-overlay">
-                <div class="navbar">
-               
-          </div>
-
-        <h1>Your Next Journey Starts Here</h1>
-        <p>Book affordable flight tickets and explore the world with SkyFly.</p>
-    </div>
-
-</section>
-
-
-    
-            <section class="search">
-
-                <div class="tabs">
-                    <button class="Oneway">One Way</button>
+    <main>
+        <header class="hero">
+            <div class="top">
+                <div class="menu">
+                    <a href="#">Flights⌄</a>
+                    <a href="#" data-nav="hotels">Hotels</a>
+                    <a href="#" data-nav="explore">Explore⌄</a>
                 </div>
 
-                <div class="form">
-
-                    <div class="field">
-                        <label>From</label>
-                        <span id="from">Jakarta (CGK)</span>
-                    </div>
-
-                    <button class="swap" id="swap">⇄</button>
-
-                    <div class="field">
-                        <label>To</label>
-                        <span id="to">Bali (DPS)</span>
-                    </div>
-
-                    <div class="field">
-                        <label>Departure Date</label>
-                        <span>29 November 2025</span>
-                    </div>
-
-                    <div class="field">
-                        <label>Return Date</label>
-                        <span>3 December 2025</span>
-                    </div>
-
-                    <div class="field">
-                        <label>Passengers</label>
-                        <span>1 Adult</span>
-                    </div>
-
-                    <button class="search-button">Search Flights →</button>
-
+                <div class="user">
+                    <button class="bell" aria-label="Notifications">
+                        <svg class="i" viewBox="0 0 24 24">
+                            <path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/>
+                        </svg>
+                    </button>
+                    <span class="avatar">R</span>
                 </div>
-            </section>
+            </div>
 
-        
-            <section class="content">
+            <h1>Your Next Journey<br>Starts Here</h1>
+            <p>Book affordable flight tickets and explore<br>the world with SkyFly.</p>
 
-                <div class="left-content">
+            <svg class="jet" viewBox="0 0 24 24">
+                <path d="M2 14l20-9-6 16-4-6-6-1z"/>
+            </svg>
+        </header>
 
-                    <div class="section-title">
-                        <h2>Popular Routes</h2>
-                        <a href="#">See all</a>
-                    </div>
+        <section class="search">
+            <div class="tabs">
+                <span class="badge">✈ Flight</span>
+                <button type="button" class="tab on" data-trip="round">Round Trip</button>
+                <button type="button" class="tab" data-trip="oneway">One Way</button>
+                <button type="button" class="tab" data-trip="multi">Multi-City</button>
+            </div>
 
-                    <div class="routes">
-
-                        <div class="route">
-                            <h3>Jakarta → Bali</h3>
-                            <p>From Rp 1.2M</p>
-                        </div>
-
-                        <div class="route">
-                            <h3>Jakarta → Denpasar</h3>
-                            <p>From Rp 1.3M</p>
-                        </div>
-
-                        <div class="route">
-                            <h3>Jakarta → Surabaya</h3>
-                            <p>From Rp 850K</p>
-                        </div>
-
-                        <div class="route">
-                            <h3>Jakarta → Yogyakarta</h3>
-                            <p>From Rp 720K</p>
-                        </div>
-
-                    </div>
-
-                    <!-- Best Deals -->
-                    <div class="section-title">
-                        <h2>Best Deals</h2>
-                        <a href="#">See all</a>
-                    </div>
-
-                    <div id="deals"></div>
-
+            <form class="form" id="form">
+                <div class="field">
+                    <label for="from">From</label>
+                    <select id="from" required></select>
                 </div>
 
-                <aside class="info">
-                    <h2>Fly Easy with SkyFly</h2>
-                    <p>Fast booking, secure payment, and great support.</p>
-                </aside>
+                <button type="button" class="swap" id="swap" aria-label="Swap cities">⇄</button>
 
-            </section>
+                <div class="field">
+                    <label for="to">To</label>
+                    <select id="to" required></select>
+                </div>
 
-        </main>
-    </div>
+                <div class="field">
+                    <label for="dep">Departure Date</label>
+                    <input type="date" id="dep" required>
+                </div>
 
-    <script src="interactive.js"></script>
+                <div class="field" id="ret-box">
+                    <label for="ret">Return Date</label>
+                    <input type="date" id="ret">
+                </div>
+
+                <div class="field">
+                    <label for="pax">Passengers</label>
+                    <select id="pax"></select>
+                </div>
+
+                <button class="go" type="submit">Search Flights →</button>
+            </form>
+
+            <p id="msg" class="msg" role="status" hidden></p>
+        </section>
+
+        <section class="content">
+
+            <div class="routes-wrap">
+                <div class="head">
+                    <h2>Popular Routes</h2>
+                    <a href="#deals">See all →</a>
+                </div>
+
+                <div class="routes">
+                    <button class="route r1" data-to="DPS">
+                        <b>Jakarta → Bali</b>
+                        <span>From Rp 1.2M</span>
+                    </button>
+
+                    <button class="route r2" data-to="DPS">
+                        <b>Jakarta → Denpasar</b>
+                        <span>From Rp 1.3M</span>
+                    </button>
+
+                    <button class="route r3" data-to="SUB">
+                        <b>Jakarta → Surabaya</b>
+                        <span>From Rp 850K</span>
+                    </button>
+
+                    <button class="route r4" data-to="YIA">
+                        <b>Jakarta → Yogyakarta</b>
+                        <span>From Rp 720K</span>
+                    </button>
+                </div>
+            </div>
+
+            <aside class="fly">
+                <h2>Fly Easy<br>with SkyFly</h2>
+                <p>Fast booking,<br>secure payment,<br>and great support.</p>
+                <a href="#deals" class="pill white">Learn More →</a>
+                <span class="bag">🧳</span>
+            </aside>
+
+            <div class="deals-wrap" id="deals">
+                <div class="head">
+                    <h2>Best Deals</h2>
+                    <a href="#deals">See all →</a>
+                </div>
+                <div id="deal-list"></div>
+            </div>
+
+        </section>
+    </main>
+</div>
+
+<dialog id="dlg">
+    <div id="dlg-body"></div>
+</dialog>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="interactive.js"></script>
 </body>
 </html>
