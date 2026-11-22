@@ -30,7 +30,8 @@ const AIRLINES = [
         mins: 135,
         price: 1235000,
         code: "GA",
-        color: "#087da8"
+        color: "#087da8",
+        logo: "img/garuda.png"
     },
     {
         name: "Lion Air",
@@ -39,7 +40,8 @@ const AIRLINES = [
         mins: 140,
         price: 1150000,
         code: "JT",
-        color: "#e11d2e"
+        color: "#e11d2e",
+        logo: "img/lion.png"
     },
     {
         name: "Batik Air",
@@ -48,7 +50,8 @@ const AIRLINES = [
         mins: 145,
         price: 1180000,
         code: "ID",
-        color: "#c1121f"
+        color: "#c1121f",
+        logo: "img/batik.png"
     }
 ];
 
@@ -237,10 +240,10 @@ function renderDeals() {
         <div class="deal">
 
             <div class="air">
-                <span class="logo-b"
-                    style="color:${deal.color}">
-                    ${deal.code}
-                </span>
+                <img class="logo-b"
+                    src="${deal.logo}"
+                    alt="${esc(deal.name)}"
+                >
 
                 <div>
                     <b>${esc(deal.name)}</b>
