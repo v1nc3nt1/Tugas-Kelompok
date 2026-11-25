@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profil | SkyFly</title>
+  <style>
+    body { margin: 0; font-family: "Inter", "Segoe UI", system-ui, sans-serif; }
+
+/* Profil SkyFly - semua selector dibatasi di dalam .pf-page agar tidak bentrok */
+.pf-page {
+  --pf-navy: #0d1b36;
+  --pf-blue: #1a5cff;
+  --pf-blue-dark: #1247cc;
+  --pf-blue-soft: #e8efff;
+  --pf-sky: #5b8def;
+  --pf-text: #14213d;
+  --pf-muted: #6b7a99;
+  --pf-line: #dde4f0;
+  --pf-danger: #d93d4a;
+  --pf-ok: #1f9d6b;
+  color: var(--pf-text);
+  padding: 32px 40px 56px;
+}
+.pf-page *, .pf-page *::before, .pf-page *::after { box-sizing: border-box; }
+.pf-page h1, .pf-page h2, .pf-page h3, .pf-page p { margin: 0; }
+
+.pf-head h1 { font-size: 32px; font-weight: 800; letter-spacing: -.02em; }
+.pf-head p { margin-top: 6px; color: var(--pf-muted); }
+
+.pf-layout {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 24px;
+  margin-top: 24px;
+  align-items: start;
+}
+.pf-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 28px rgba(20, 40, 90, .08);
+}
+.pf-fields { display: grid; gap: 20px; }
+.pf-card h3 { font-size: 17px; margin-bottom: 18px; }
+
+/* Ringkasan */
+.pf-summary { text-align: center; position: sticky; top: 24px; }
+.pf-avatar {
+  width: 112px; height: 112px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--pf-navy);
+  color: #fff;
+  display: grid; place-items: center;
+  font-size: 44px; font-weight: 700;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  outline: 4px solid var(--pf-blue-soft);
+  transition: outline-color .2s;
+}
+.pf-avatar:hover { outline-color: var(--pf-sky); }
+.pf-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.pf-avatar::after {
+  content: "Ganti foto";
+  position: absolute; inset: auto 0 0 0;
+  background: rgba(13, 27, 54, .7);
+  font-size: 11px; padding: 6px 0;
+  transform: translateY(100%);
+  transition: transform .2s;
+}
+.pf-avatar:hover::after { transform: none; }
+.pf-photo-actions { display: flex; justify-content: center; align-items: center; gap: 14px; margin-bottom: 6px; }
+.pf-small { height: 36px; padding: 0 18px; font-size: 13px; }
+.pf-link {
+  background: none; border: 0; padding: 0;
+  color: var(--pf-danger);
+  font: inherit; font-size: 13px; font-weight: 600;
+  cursor: pointer;
+}
+.pf-link:hover { text-decoration: underline; }
+.pf-link:focus-visible { outline: 3px solid var(--pf-sky); outline-offset: 2px; border-radius: 4px; }
+.pf-hint { font-size: 12px; color: var(--pf-muted); margin-bottom: 16px; }
+.pf-summary h2 { font-size: 20px; }
+.pf-muted { color: var(--pf-muted); font-size: 14px; margin-top: 4px; word-break: break-all; }
+
+.pf-progress { margin-top: 24px; text-align: left; }
+.pf-progress-head { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+.pf-progress-head strong { color: var(--pf-blue); }
+.pf-bar { height: 8px; background: var(--pf-blue-soft); border-radius: 99px; overflow: hidden; }
+#pfBarFill {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--pf-blue), var(--pf-sky));
+  border-radius: 99px;
+  transition: width .4s ease;
+}
+
+/* Form */
+.pf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+.pf-full { grid-column: 1 / -1; }
+.pf-field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.pf-field input, .pf-field select {
+  width: 100%; height: 46px;
+  padding: 0 14px;
+  border: 1.5px solid var(--pf-line);
+  border-radius: 10px;
+  background: #fff;
+  font: inherit; font-size: 14px;
+  color: var(--pf-text);
+  transition: border-color .15s, box-shadow .15s;
+}
+.pf-field input:focus, .pf-field select:focus {
+  outline: none;
+  border-color: var(--pf-blue);
+  box-shadow: 0 0 0 4px var(--pf-blue-soft);
+}
+.pf-field.pf-invalid input, .pf-field.pf-invalid select { border-color: var(--pf-danger); }
+.pf-error { display: block; color: var(--pf-danger); font-size: 12px; margin-top: 4px; }
+
+.pf-actions { display: flex; justify-content: flex-end; gap: 12px; }
+.pf-btn {
+  height: 48px; padding: 0 28px;
+  border-radius: 10px;
+  font: inherit; font-weight: 600; font-size: 14px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: background .15s, transform .1s;
+}
+.pf-btn:active { transform: scale(.98); }
+.pf-btn:focus-visible { outline: 3px solid var(--pf-sky); outline-offset: 2px; }
+.pf-primary { background: var(--pf-blue); color: #fff; }
+.pf-primary:hover { background: var(--pf-blue-dark); }
+.pf-ghost { background: #fff; border-color: var(--pf-line); color: var(--pf-text); }
+.pf-ghost:hover { background: var(--pf-blue-soft); }
+
+/* Toast */
+#pfToast {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translate(-50%, 20px);
+  background: #0d1b36; color: #fff;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-size: 14px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 999;
+}
+#pfToast.pf-show { opacity: 1; transform: translate(-50%, 0); }
+#pfToast.pf-ok { border-left: 4px solid #1f9d6b; }
+#pfToast.pf-bad { border-left: 4px solid #d93d4a; }
+
+/* Responsif */
+@media (max-width: 960px) {
+  .pf-page { padding: 24px 20px 40px; }
+  .pf-layout { grid-template-columns: 1fr; }
+  .pf-summary { position: static; }
+}
+@media (max-width: 640px) {
+  .pf-grid { grid-template-columns: 1fr; }
+  .pf-actions .pf-btn { flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pf-page *, #pfToast { transition: none !important; }
+}
+
+/* ================= TEMA WARNA SKYFLY ================= */
+.pf-page {
+  --pf-sunset: #ff8a7a;
+  --pf-cyan: #1fb6d4;
+  background: linear-gradient(180deg, #e6eeff 0%, #f5f8ff 320px);
+}
+
+/* Banner judul: langit biru dengan semburat senja seperti hero */
+.pf-head {
+  padding: 32px 36px;
+  border-radius: 20px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 15%, rgba(255, 170, 150, .55), transparent 45%),
+    linear-gradient(135deg, #2a4fb5 0%, #4f7fe0 55%, #8aa9ee 100%);
+  box-shadow: 0 12px 30px rgba(42, 79, 181, .25);
+}
+.pf-head p { color: rgba(255, 255, 255, .9); }
+
+/* Kartu foto: sampul gradasi + foto menimpa sampul */
+.pf-summary { overflow: hidden; padding-top: 0; }
+.pf-summary::before {
+  content: "";
+  display: block;
+  height: 96px;
+  margin: 0 -24px;
+  background:
+    radial-gradient(circle at 80% 30%, rgba(255, 170, 150, .6), transparent 50%),
+    linear-gradient(135deg, #0d1b36 0%, #1a5cff 100%);
+}
+.pf-avatar {
+  margin: -56px auto 14px;
+  background: linear-gradient(135deg, #1a5cff, #0d1b36);
+  outline: none;
+  box-shadow: 0 0 0 5px #fff, 0 0 0 8px var(--pf-sky), 0 8px 20px rgba(26, 92, 255, .3);
+}
+.pf-avatar:hover { box-shadow: 0 0 0 5px #fff, 0 0 0 8px var(--pf-sunset), 0 8px 20px rgba(255, 138, 122, .35); }
+
+/* Progres: biru ke senja */
+#pfBarFill { background: linear-gradient(90deg, #1a5cff, #5b8def, var(--pf-sunset)); }
+#pfPct {
+  background: var(--pf-blue-soft);
+  padding: 2px 10px;
+  border-radius: 99px;
+}
+
+/* Judul tiap bagian: chip ikon berwarna */
+.pf-card h3 { display: flex; align-items: center; gap: 12px; }
+.pf-card h3::before {
+  content: "";
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px;
+  flex-shrink: 0;
+}
+.pf-fields > .pf-card { border-top: 3px solid transparent; }
+.pf-fields > .pf-card:nth-child(1) { border-top-color: #1a5cff; }
+.pf-fields > .pf-card:nth-child(2) { border-top-color: #1fb6d4; }
+.pf-fields > .pf-card:nth-child(3) { border-top-color: #ff8a7a; }
+.pf-fields > .pf-card:nth-child(1) h3::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 21c0-4 4-6 8-6s8 2 8 6'/%3E%3C/svg%3E");  background-color: #1a5cff; }
+.pf-fields > .pf-card:nth-child(2) h3::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='M3 7l9 6 9-6'/%3E%3C/svg%3E");  background-color: #1fb6d4; }
+.pf-fields > .pf-card:nth-child(3) h3::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='3' width='14' height='18' rx='2'/%3E%3Cpath d='M9 8h6M9 12h6M9 16h4'/%3E%3C/svg%3E");   background-color: #ff8a7a; }
+
+/* Tombol */
+.pf-primary {
+  background: linear-gradient(135deg, #1a5cff, #4f7fe0);
+  box-shadow: 0 8px 18px rgba(26, 92, 255, .3);
+}
+.pf-primary:hover { background: linear-gradient(135deg, #1247cc, #1a5cff); }
+.pf-ghost { color: var(--pf-blue); border-color: #bcd0ff; }
+.pf-field input:hover, .pf-field select:hover { border-color: #bcd0ff; }
+  </style>
+</head>
+<body>
+<section class="pf-page">
+  <div class="pf-head">
+    <h1>Profil Saya</h1>
+    <p>Lengkapi data Anda agar pemesanan tiket berikutnya lebih cepat.</p>
+  </div>
+
+  <form id="pfForm" class="pf-layout" novalidate>
+    <!-- Kartu kiri -->
+    <div class="pf-card pf-summary">
+      <label class="pf-avatar" for="pfPhoto" title="Ganti foto">
+        <img id="pfAvatarImg" alt="" hidden>
+        <span id="pfAvatarInitial">R</span>
+      </label>
+      <input type="file" id="pfPhoto" accept="image/*" hidden>
+      <div class="pf-photo-actions">
+        <button type="button" class="pf-btn pf-ghost pf-small" id="pfChangePhoto">Ganti foto</button>
+        <button type="button" class="pf-link" id="pfRemovePhoto" hidden>Hapus foto</button>
+      </div>
+      <p class="pf-hint">JPG atau PNG, maksimal 3 MB</p>
+      <h2 id="pfDisplayName">Nama Lengkap</h2>
+      <p id="pfDisplayEmail" class="pf-muted">email@contoh.com</p>
+      <div class="pf-progress">
+        <div class="pf-progress-head"><span>Kelengkapan profil</span><strong id="pfPct">0%</strong></div>
+        <div class="pf-bar"><div id="pfBarFill"></div></div>
+      </div>
+    </div>
+
+    <!-- Kolom kanan -->
+    <div class="pf-fields">
+      <div class="pf-card">
+        <h3>Data pribadi</h3>
+        <div class="pf-grid">
+          <div class="pf-field">
+            <label for="pfFullName">Nama lengkap (sesuai KTP/paspor)</label>
+            <input id="pfFullName" name="fullName" placeholder="Contoh: Rina Putri Lestari">
+            <small class="pf-error"></small>
+          </div>
+          <div class="pf-field">
+            <label for="pfGender">Jenis kelamin</label>
+            <select id="pfGender" name="gender">
+              <option value="">Pilih</option><option>Laki-laki</option><option>Perempuan</option>
+            </select>
+            <small class="pf-error"></small>
+          </div>
+          <div class="pf-field">
+            <label for="pfBirth">Tanggal lahir</label>
+            <input type="date" id="pfBirth" name="birth">
+            <small class="pf-error"></small>
+          </div>
+          <div class="pf-field">
+            <label for="pfNationality">Kewarganegaraan</label>
+            <input id="pfNationality" name="nationality" value="Indonesia">
+            <small class="pf-error"></small>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-card">
+        <h3>Kontak</h3>
+        <div class="pf-grid">
+          <div class="pf-field">
+            <label for="pfEmail">Email</label>
+            <input type="email" id="pfEmail" name="email" placeholder="nama@email.com">
+            <small class="pf-error"></small>
+          </div>
+          <div class="pf-field">
+            <label for="pfPhone">Nomor WhatsApp</label>
+            <input type="tel" id="pfPhone" name="phone" placeholder="08123456789">
+            <small class="pf-error"></small>
+          </div>
+          <div class="pf-field pf-full">
+            <label for="pfCity">Kota asal</label>
+            <input id="pfCity" name="city" list="pfCities" placeholder="Jakarta (CGK)">
+            <datalist id="pfCities">
+              <option value="Jakarta (CGK)"><option value="Surabaya (SUB)">
+              <option value="Yogyakarta (YIA)"><option value="Bali (DPS)"><option value="Semarang (SRG)">
+            </datalist>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-card">
+        <h3>Dokumen perjalanan</h3>
+        <div class="pf-grid">
+          <div class="pf-field">
+            <label for="pfId">Nomor KTP (16 digit)</label>
+            <input id="pfId" name="idNumber" inputmode="numeric" maxlength="16" placeholder="3374xxxxxxxxxxxx">
+            <small class="pf-error"></small>
+          </div>
+          <div class="pf-field">
+            <label for="pfPassport">Nomor paspor</label>
+            <input id="pfPassport" name="passport" maxlength="8" placeholder="A1234567">
+            <small class="pf-error"></small>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-actions">
+        <button type="button" class="pf-btn pf-ghost" id="pfReset">Reset</button>
+        <button type="submit" class="pf-btn pf-primary">Simpan profil</button>
+      </div>
+    </div>
+  </form>
+
+  <div id="pfToast" role="status" aria-live="polite"></div>
+</section>
+
+  <script>
+// Profil SkyFly - dibungkus IIFE supaya tidak mengganggu variabel global di kode Anda
+(function () {
+  const STORAGE_KEY = "skyfly_profile";
+  const form = document.getElementById("pfForm");
+  if (!form) return; // aman jika script dimuat di halaman lain
+
+  const toast = document.getElementById("pfToast");
+  const barFill = document.getElementById("pfBarFill");
+  const pct = document.getElementById("pfPct");
+  const avatarImg = document.getElementById("pfAvatarImg");
+  const avatarInitial = document.getElementById("pfAvatarInitial");
+
+  const TRACKED = ["fullName", "gender", "birth", "nationality", "email", "phone", "city", "idNumber", "passport"];
+
+  const rules = {
+    fullName: v => (v.trim().length < 3 ? "Nama minimal 3 karakter." : ""),
+    gender: v => (!v ? "Pilih jenis kelamin." : ""),
+    birth: v => {
+      if (!v) return "Tanggal lahir wajib diisi.";
+      return new Date(v) > new Date() ? "Tanggal lahir tidak valid." : "";
+    },
+    nationality: v => (!v.trim() ? "Kewarganegaraan wajib diisi." : ""),
+    email: v => (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? "" : "Format email belum benar."),
+    phone: v => (/^(\+62|62|0)8\d{8,11}$/.test(v.replace(/[\s-]/g, "")) ? "" : "Gunakan nomor Indonesia, contoh 08123456789."),
+    idNumber: v => (v && !/^\d{16}$/.test(v) ? "Nomor KTP harus 16 digit angka." : ""),
+    passport: v => (!v ? "Nomor paspor wajib diisi." : !/^[A-Za-z]\d{7}$/.test(v) ? "Format paspor: 1 huruf + 7 angka." : ""),
+  };
+
+  function showToast(msg, type = "ok") {
+    toast.textContent = msg;
+    toast.className = `pf-show pf-${type}`;
+    clearTimeout(showToast.t);
+    showToast.t = setTimeout(() => (toast.className = ""), 2800);
+  }
+
+  function validateField(input) {
+    const rule = rules[input.name];
+    if (!rule) return true;
+    const msg = rule(input.value);
+    const wrap = input.closest(".pf-field");
+    wrap.classList.toggle("pf-invalid", !!msg);
+    wrap.querySelector(".pf-error").textContent = msg;
+    return !msg;
+  }
+
+  function updateSummary() {
+    const name = form.fullName.value.trim();
+    document.getElementById("pfDisplayName").textContent = name || "Nama Lengkap";
+    document.getElementById("pfDisplayEmail").textContent = form.email.value.trim() || "email@contoh.com";
+    if (avatarImg.hidden) avatarInitial.textContent = (name[0] || "R").toUpperCase();
+
+    const filled = TRACKED.filter(n => form[n].value.trim()).length;
+    const p = Math.round((filled / TRACKED.length) * 100);
+    barFill.style.width = p + "%";
+    pct.textContent = p + "%";
+  }
+
+  const removeBtn = document.getElementById("pfRemovePhoto");
+
+  function setAvatar(src) {
+    avatarImg.src = src;
+    avatarImg.hidden = false;
+    avatarInitial.hidden = true;
+    removeBtn.hidden = false;
+  }
+
+  function clearAvatar() {
+    avatarImg.removeAttribute("src");
+    avatarImg.hidden = true;
+    avatarInitial.hidden = false;
+    removeBtn.hidden = true;
+    updateSummary();
+  }
+
+  // Tombol "Ganti foto" membuka pemilih file; "Hapus foto" mengembalikan ke inisial
+  document.getElementById("pfChangePhoto").addEventListener("click", () => document.getElementById("pfPhoto").click());
+  removeBtn.addEventListener("click", () => {
+    clearAvatar();
+    showToast("Foto profil dihapus. Klik Simpan profil untuk menyimpan.");
+  });
+
+  // Upload foto: dipotong persegi & dikecilkan 256px
+  document.getElementById("pfPhoto").addEventListener("change", e => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) return showToast("File harus berupa gambar.", "bad");
+    if (file.size > 3 * 1024 * 1024) return showToast("Ukuran foto maksimal 3 MB.", "bad");
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        const size = 256, s = Math.min(img.width, img.height);
+        const canvas = document.createElement("canvas");
+        canvas.width = canvas.height = size;
+        canvas.getContext("2d").drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, size, size);
+        setAvatar(canvas.toDataURL("image/jpeg", 0.85));
+        showToast("Foto diganti. Klik Simpan profil untuk menyimpan.");
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+    e.target.value = ""; // supaya file yang sama bisa dipilih lagi
+  });
+
+  form.addEventListener("focusout", e => { if (e.target.name) validateField(e.target); });
+  form.addEventListener("input", e => {
+    if (e.target.name === "idNumber") e.target.value = e.target.value.replace(/\D/g, "");
+    if (e.target.name === "passport") e.target.value = e.target.value.toUpperCase();
+    if (e.target.closest(".pf-invalid")) validateField(e.target);
+    updateSummary();
+  });
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const inputs = [...form.querySelectorAll("input[name], select[name]")];
+    const invalid = inputs.filter(i => !validateField(i));
+    if (invalid.length) {
+      invalid[0].focus();
+      return showToast("Periksa kembali isian yang bertanda merah.", "bad");
+    }
+
+    const data = {};
+    inputs.forEach(i => (data[i.name] = i.type === "checkbox" ? i.checked : i.value.trim()));
+    data.photo = avatarImg.hidden ? "" : avatarImg.src;
+
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      showToast("Profil berhasil disimpan.");
+      // Jika sudah ada backend, kirim di sini:
+      // fetch("/api/profile", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+    } catch {
+      showToast("Gagal menyimpan. Coba lagi.", "bad");
+    }
+  });
+
+  document.getElementById("pfReset").addEventListener("click", () => {
+    form.reset();
+    clearAvatar();
+    form.querySelectorAll(".pf-invalid").forEach(f => f.classList.remove("pf-invalid"));
+    form.querySelectorAll(".pf-error").forEach(s => (s.textContent = ""));
+    localStorage.removeItem(STORAGE_KEY);
+    updateSummary();
+    showToast("Formulir dikosongkan.");
+  });
+
+  // Isi ulang dari data tersimpan
+  try {
+    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+    if (data) {
+      Object.entries(data).forEach(([k, v]) => {
+        const el = form.elements[k];
+        if (!el) return;
+        el.type === "checkbox" ? (el.checked = v) : (el.value = v);
+      });
+      if (data.photo) setAvatar(data.photo);
+    }
+  } catch { /* abaikan data rusak */ }
+  updateSummary();
+})();
+  </script>
+</body>
+</html>
