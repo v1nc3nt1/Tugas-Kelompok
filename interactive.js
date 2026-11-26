@@ -771,7 +771,17 @@ document.addEventListener("click", event => {
         }
 
         if (page === "profile") {
-            toast("Profile feature coming soon!");
+            // Profil butuh akun: pengunjung yang belum login diarahkan ke halaman login
+            window.location.href = Auth.get()
+                ? "profil.html"
+                : "LoginPageSkyfly.html";
+            return;
+        }
+
+        if (page === "logout") {
+            Auth.logout();
+            renderAuth();
+            toast("Anda sudah keluar.");
             return;
         }
 
@@ -810,6 +820,32 @@ $$(".side nav a").forEach(link => {
     });
 
 });
+
+// ==========================================
+// AUTH UI (Sign In / akun)
+// ==========================================
+
+function renderAuth() {
+    const user = Auth.get();
+
+    $("#signin").hidden = !!user;
+    $("#user-chip").hidden = !user;
+    $('[data-nav="logout"]').hidden = !user;
+
+    if (user) {
+        $("#avatar").textContent = (user.username[0] || "U").toUpperCase();
+        $("#user-name").textContent = user.username;
+    }
+}
+
+renderAuth();
+
+// Tautan dari sidebar halaman profil: index.html?page=booking|checkin|help
+const startPage = new URLSearchParams(location.search).get("page");
+
+if (startPage === "booking") openBookings();
+if (startPage === "checkin") toast("Check-in feature coming soon!");
+if (startPage === "help") toast("SkyFly Help Center coming soon!");
 
 // ==========================================
 // INITIALIZE SKYFLY

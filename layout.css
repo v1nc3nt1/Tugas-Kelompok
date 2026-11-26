@@ -1022,3 +1022,32 @@ dialog::backdrop {
     font-size: 18px;
   }
 }
+
+/* SIGN IN */
+
+.signin {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  border-radius: 999px;
+  color: #0759ed;
+  background: white;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 6px 16px rgba(10, 30, 80, 0.25);
+  transition: 0.2s;
+}
+
+.signin:hover {
+  transform: translateY(-1px);
+  filter: brightness(0.95);
+}
+
+.user-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}

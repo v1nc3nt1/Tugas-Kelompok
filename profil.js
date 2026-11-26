@@ -127,6 +127,10 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       showToast("Profil berhasil disimpan.");
+      // Datang dari halaman login? Lanjut otomatis ke beranda
+      if (new URLSearchParams(location.search).has("welcome")) {
+        setTimeout(() => (location.href = "index.html"), 1200);
+      }
       // Jika sudah ada backend, kirim di sini:
       // fetch("/api/profile", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
     } catch {
@@ -162,6 +166,19 @@
     bgVideo.removeAttribute("autoplay");
     bgVideo.pause();
   }
+
+  // Isi email dari akun yang login (jika belum ada data tersimpan)
+  const session = window.Auth && Auth.get();
+  if (session && !form.email.value && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(session.username)) {
+    form.email.value = session.username;
+  }
+
+  const logoutBtn = document.getElementById("pfLogout");
+  if (logoutBtn) logoutBtn.addEventListener("click", e => {
+    e.preventDefault();
+    Auth.logout();
+    location.href = "index.html";
+  });
 
   updateSummary();
 })();

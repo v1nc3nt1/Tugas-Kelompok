@@ -1,0 +1,235 @@
+    
+/* Profil SkyFly - semua selector dibatasi di dalam .pf-page agar tidak bentrok */
+.pf-page {
+  --pf-navy: #0d1b36;
+  --pf-blue: #1a5cff;
+  --pf-blue-dark: #1247cc;
+  --pf-blue-soft: #e8efff;
+  --pf-sky: #5b8def;
+  --pf-text: #14213d;
+  --pf-muted: #6b7a99;
+  --pf-line: #dde4f0;
+  --pf-danger: #d93d4a;
+  --pf-ok: #1f9d6b;
+  color: var(--pf-text);
+  padding: 32px 40px 56px;
+}
+.pf-page *, .pf-page *::before, .pf-page *::after { box-sizing: border-box; }
+.pf-page h1, .pf-page h2, .pf-page h3, .pf-page p { margin: 0; }
+
+.pf-head h1 { font-size: 32px; font-weight: 800; letter-spacing: -.02em; }
+.pf-head p { margin-top: 6px; color: var(--pf-muted); }
+
+.pf-layout {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 24px;
+  margin-top: 24px;
+  align-items: start;
+}
+.pf-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 28px rgba(20, 40, 90, .08);
+}
+.pf-fields { display: grid; gap: 20px; }
+.pf-card h3 { font-size: 17px; margin-bottom: 18px; }
+
+/* Ringkasan */
+.pf-summary { text-align: center; position: sticky; top: 24px; }
+.pf-avatar {
+  width: 112px; height: 112px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--pf-navy);
+  color: #fff;
+  display: grid; place-items: center;
+  font-size: 44px; font-weight: 700;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  outline: 4px solid var(--pf-blue-soft);
+  transition: outline-color .2s;
+}
+.pf-avatar:hover { outline-color: var(--pf-sky); }
+.pf-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.pf-avatar::after {
+  content: "Ganti foto";
+  position: absolute; inset: auto 0 0 0;
+  background: rgba(13, 27, 54, .7);
+  font-size: 11px; padding: 6px 0;
+  transform: translateY(100%);
+  transition: transform .2s;
+}
+.pf-avatar:hover::after { transform: none; }
+.pf-photo-actions { display: flex; justify-content: center; align-items: center; gap: 14px; margin-bottom: 6px; }
+.pf-small { height: 36px; padding: 0 18px; font-size: 13px; }
+.pf-link {
+  background: none; border: 0; padding: 0;
+  color: var(--pf-danger);
+  font: inherit; font-size: 13px; font-weight: 600;
+  cursor: pointer;
+}
+.pf-link:hover { text-decoration: underline; }
+.pf-link:focus-visible { outline: 3px solid var(--pf-sky); outline-offset: 2px; border-radius: 4px; }
+.pf-hint { font-size: 12px; color: var(--pf-muted); margin-bottom: 16px; }
+.pf-summary h2 { font-size: 20px; }
+.pf-muted { color: var(--pf-muted); font-size: 14px; margin-top: 4px; word-break: break-all; }
+
+.pf-progress { margin-top: 24px; text-align: left; }
+.pf-progress-head { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 8px; }
+.pf-progress-head strong { color: var(--pf-blue); }
+.pf-bar { height: 8px; background: var(--pf-blue-soft); border-radius: 99px; overflow: hidden; }
+#pfBarFill {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--pf-blue), var(--pf-sky));
+  border-radius: 99px;
+  transition: width .4s ease;
+}
+
+/* Form */
+.pf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; }
+.pf-full { grid-column: 1 / -1; }
+.pf-field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.pf-field input, .pf-field select {
+  width: 100%; height: 46px;
+  padding: 0 14px;
+  border: 1.5px solid var(--pf-line);
+  border-radius: 10px;
+  background: #fff;
+  font: inherit; font-size: 14px;
+  color: var(--pf-text);
+  transition: border-color .15s, box-shadow .15s;
+}
+.pf-field input:focus, .pf-field select:focus {
+  outline: none;
+  border-color: var(--pf-blue);
+  box-shadow: 0 0 0 4px var(--pf-blue-soft);
+}
+.pf-field.pf-invalid input, .pf-field.pf-invalid select { border-color: var(--pf-danger); }
+.pf-error { display: block; color: var(--pf-danger); font-size: 12px; margin-top: 4px; }
+
+.pf-actions { display: flex; justify-content: flex-end; gap: 12px; }
+.pf-btn {
+  height: 48px; padding: 0 28px;
+  border-radius: 10px;
+  font: inherit; font-weight: 600; font-size: 14px;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: background .15s, transform .1s;
+}
+.pf-btn:active { transform: scale(.98); }
+.pf-btn:focus-visible { outline: 3px solid var(--pf-sky); outline-offset: 2px; }
+.pf-primary { background: var(--pf-blue); color: #fff; }
+.pf-primary:hover { background: var(--pf-blue-dark); }
+.pf-ghost { background: #fff; border-color: var(--pf-line); color: var(--pf-text); }
+.pf-ghost:hover { background: var(--pf-blue-soft); }
+
+/* Toast */
+#pfToast {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translate(-50%, 20px);
+  background: #0d1b36; color: #fff;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-size: 14px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 999;
+}
+#pfToast.pf-show { opacity: 1; transform: translate(-50%, 0); }
+#pfToast.pf-ok { border-left: 4px solid #1f9d6b; }
+#pfToast.pf-bad { border-left: 4px solid #d93d4a; }
+
+/* Responsif */
+@media (max-width: 960px) {
+  .pf-page { padding: 24px 20px 40px; }
+  .pf-layout { grid-template-columns: 1fr; }
+  .pf-summary { position: static; }
+}
+@media (max-width: 640px) {
+  .pf-grid { grid-template-columns: 1fr; }
+  .pf-actions .pf-btn { flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pf-page *, #pfToast { transition: none !important; }
+}
+
+/* ================= TEMA WARNA SKYFLY ================= */
+.pf-page {
+  --pf-sunset: #ff8a7a;
+  --pf-cyan: #1fb6d4;
+  background: linear-gradient(180deg, #e6eeff 0%, #f5f8ff 320px);
+}
+
+/* Banner judul: langit biru dengan semburat senja seperti hero */
+.pf-head {
+  padding: 32px 36px;
+  border-radius: 20px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 15%, rgba(255, 170, 150, .55), transparent 45%),
+    linear-gradient(135deg, #2a4fb5 0%, #4f7fe0 55%, #8aa9ee 100%);
+  box-shadow: 0 12px 30px rgba(42, 79, 181, .25);
+}
+.pf-head p { color: rgba(255, 255, 255, .9); }
+
+/* Kartu foto: sampul gradasi + foto menimpa sampul */
+.pf-summary { overflow: hidden; padding-top: 0; }
+.pf-summary::before {
+  content: "";
+  display: block;
+  height: 96px;
+  margin: 0 -24px;
+  background:
+    radial-gradient(circle at 80% 30%, rgba(255, 170, 150, .6), transparent 50%),
+    linear-gradient(135deg, #0d1b36 0%, #1a5cff 100%);
+}
+.pf-avatar {
+  margin: -56px auto 14px;
+  background: linear-gradient(135deg, #1a5cff, #0d1b36);
+  outline: none;
+  box-shadow: 0 0 0 5px #fff, 0 0 0 8px var(--pf-sky), 0 8px 20px rgba(26, 92, 255, .3);
+}
+.pf-avatar:hover { box-shadow: 0 0 0 5px #fff, 0 0 0 8px var(--pf-sunset), 0 8px 20px rgba(255, 138, 122, .35); }
+
+/* Progres: biru ke senja */
+#pfBarFill { background: linear-gradient(90deg, #1a5cff, #5b8def, var(--pf-sunset)); }
+#pfPct {
+  background: var(--pf-blue-soft);
+  padding: 2px 10px;
+  border-radius: 99px;
+}
+
+/* Judul tiap bagian: chip ikon berwarna */
+.pf-card h3 { display: flex; align-items: center; gap: 12px; }
+.pf-card h3::before {
+  content: "";
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px;
+  flex-shrink: 0;
+}
+.pf-fields > .pf-card { border-top: 3px solid transparent; }
+.pf-fields > .pf-card:nth-child(1) { border-top-color: #1a5cff; }
+.pf-fields > .pf-card:nth-child(2) { border-top-color: #1fb6d4; }
+.pf-fields > .pf-card:nth-child(3) { border-top-color: #ff8a7a; }
+.pf-fields > .pf-card:nth-child(1) h3::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8' r='4'/%3E%3Cpath d='M4 21c0-4 4-6 8-6s8 2 8 6'/%3E%3C/svg%3E");  background-color: #1a5cff; }
+.pf-fields > .pf-card:nth-child(2) h3::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Cpath d='M3 7l9 6 9-6'/%3E%3C/svg%3E");  background-color: #1fb6d4; }
+.pf-fields > .pf-card:nth-child(3) h3::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='5' y='3' width='14' height='18' rx='2'/%3E%3Cpath d='M9 8h6M9 12h6M9 16h4'/%3E%3C/svg%3E");   background-color: #ff8a7a; }
+
+/* Tombol */
+.pf-primary {
+  background: linear-gradient(135deg, #1a5cff, #4f7fe0);
+  box-shadow: 0 8px 18px rgba(26, 92, 255, .3);
+}
+.pf-primary:hover { background: linear-gradient(135deg, #1247cc, #1a5cff); }
+.pf-ghost { color: var(--pf-blue); border-color: #bcd0ff; }
+.pf-field input:hover, .pf-field select:hover { border-color: #bcd0ff; }
+
+/* Halaman profil berada di dalam .app (sidebar + main) milik layout.css */
+main > .pf-page { min-height: 100vh; }
+a.pf-btn { display: inline-flex; align-items: center; text-decoration: none; }
